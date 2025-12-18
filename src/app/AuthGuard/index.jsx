@@ -1,29 +1,21 @@
-
+// src/app/AuthGuard/index.jsx
 import { Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-/**
- * Protege rutas según tipo (pública o privada)
- */
+export const AuthGuard = ({ type }) => {
+  const isAuthenticated = useSelector(
+    (state) => state.auth.isAuthenticated
+  );
 
-export const AuthGuard = ({ children, type }) => {
-
-  if(type === "Private"){
-    if(!localStorage.getItem("token")){
-      return <Navigate replace to="/"/>
-    }
-
-    return children;
+  // Rutas privadas
+  if (type === "Private") {
+    return isAuthenticated ? <Outlet /> : <Navigate to="/auth/login" replace />;
   }
 
-  if(localStorage.getItem("token")){
-    return <Navigate replace to="/app/users"/>
+  // Rutas públicas (login)
+  if (type === "Public") {
+    return isAuthenticated ? <Navigate to="/app/users" replace /> : <Outlet />;
   }
-  return children;
-};
 
-const PrivateRoute = () => {
-  const auth = useAuth();
-  return auth ? <Outlet/> : <Navigate to="/auth/login" />;
+  return <Outlet />;
 };
-
-export default PrivateRoute;

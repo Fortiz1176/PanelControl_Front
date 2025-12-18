@@ -1,24 +1,14 @@
-//2. Conectar Redux Toolkit con RTK Query, manejará el estado global de la aplicación
-import { configureStore } from '@reduxjs/toolkit'; //Función para configurar el store
-import { apiSlice } from './apiSlice';
-
-import authReducer from '../pages/Login/services/authSlice';
-
-import { Middlewares } from './middlewares';
+// src/api/store.js
+import { configureStore } from "@reduxjs/toolkit";
+import { apiSlice } from "./apiSlice";
+import authReducer from "../pages/Login/services/authSlice";
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
-    auth: authReducer, 
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware, ...Middlewares),
+    getDefaultMiddleware().concat(apiSlice.middleware),
   devTools: true,
 });
-
-export const rootReducer = (state, action) => {
-  if(action.type === 'RESET_ALL'){
-    state = undefined;
-  }
-  return store(state, action);
-}

@@ -11,7 +11,7 @@ export const routesUsers = {
     name: "Users",
     Users: "users",
     raiz: "app/users",
-    /* Detalles: "/:id", */
+    Detalles: "/:id",
     General: "/"
     //inNav: true
 }

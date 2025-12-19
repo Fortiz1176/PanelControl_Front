@@ -14,7 +14,7 @@ export const AuthGuard = ({ type }) => {
 
   // Rutas públicas (login)
   if (type === "Public") {
-    return isAuthenticated ? <Navigate to="/app/users" replace /> : <Outlet />;
+    return isAuthenticated ? <Navigate to="/app" replace /> : <Outlet />;
   }
 
   return <Outlet />;

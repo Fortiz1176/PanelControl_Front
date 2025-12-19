@@ -135,6 +135,11 @@
   color: #0b2545;
 }
 
+.demo{
+  color: gray;
+  font-size: 0.8rem
+}
+
 /* BREAKPOINT TABLET / DESKTOP */
 @media (min-width: 640px) {
   .login-card {

@@ -5,7 +5,7 @@ import { LoginContext } from "../../context/LoginProvider";
 
 const FormLogin = () => {
   const {
-    states: { error, isLoading },
+    states: { data, error, isLoading },
     handlers: { onSubmit },
     form: { register, handleSubmit, errors },
   } = useLogin();
@@ -37,6 +37,17 @@ const FormLogin = () => {
       </button>
 
       {error && <p className="error">{error}</p>}
+
+      <div className="demo">
+        <p>Demo:</p>
+        <p>
+          <strong>Email:</strong> <span>{data?.results?.[0]?.email}</span>
+        </p>
+        <p>
+          <strong>Password:</strong>{" "}
+          <span>{data?.results?.[0]?.login?.password}</span>
+        </p>
+      </div>
     </form>
   );
 };

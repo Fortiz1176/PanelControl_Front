@@ -1,17 +1,25 @@
-// pages/Login/hooks/useLogin.jsx
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginSuccess } from "../services/authSlice";
+import { setUsers } from "../../Users/services/usersSlice";
 import { useGetUsersQuery } from "../../../api/userApi";
 
 export const useLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data, isLoading } = useGetUsersQuery(30);
+
+  const usersInStore = useSelector((state) => state.users.list);
+
+  const shouldFetchUsers = usersInStore.length === 0;
+
+  const { data, isLoading } = useGetUsersQuery(30, {
+    skip: !shouldFetchUsers,
+  });
+
   const [error, setError] = useState(null);
-  console.log(data?.results);
+
   const {
     register,
     handleSubmit,
@@ -21,12 +29,15 @@ export const useLogin = () => {
   const onSubmit = (formData) => {
     setError(null);
 
-    if (!data?.results) {
+    const usersSource =
+      usersInStore.length > 0 ? usersInStore : data?.results;
+
+    if (!usersSource) {
       setError("Usuarios no disponibles");
       return;
     }
 
-    const user = data.results.find(
+    const user = usersSource.find(
       (u) =>
         u.email === formData.email &&
         u.login.password === formData.password
@@ -37,12 +48,18 @@ export const useLogin = () => {
       return;
     }
 
+    //Guardar los usuarios solo una vez
+    if (usersInStore.length === 0) {
+      dispatch(setUsers(usersSource));
+    }
+
     dispatch(loginSuccess(user));
-    navigate("/app/users");
+    navigate("/app");
   };
 
   return {
     states: {
+      data,
       isLoading,
       error,
     },

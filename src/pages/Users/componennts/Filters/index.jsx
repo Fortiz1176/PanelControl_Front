@@ -1,11 +1,16 @@
 import React from "react";
 import "./index.css";
-import useUsers from "../../hooks/useUsers";
+import { useContext } from "react";
+import { UsersContext } from "../../context/UsersProvider";
 
 const Filters = () => {
   const {
-    states: { users },
-  } = useUsers();
+    useUsers: {
+      states: { users, showFilters, filters, nationalities, hasActiveFilters },
+      setters: { setShowFilters, setFilters },
+      handles: { resetFilters },
+    },
+  } = useContext(UsersContext);
 
   return (
     <section className="users-header">
@@ -72,10 +77,24 @@ const Filters = () => {
             />
           </svg>
         </span>
-        <input type="text" placeholder="Buscar por nombre o email..." />
+        <input
+          type="text"
+          placeholder="Buscar por nombre o email..."
+          value={filters.search}
+          onChange={(e) =>
+            setFilters((prev) => ({
+              ...prev,
+              search: e.target.value,
+            }))
+          }
+        />
       </div>
 
-      <button className="filter-button">
+      <div className="filters">
+        <button
+        className="filter-button"
+        onClick={() => setShowFilters(!showFilters)}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="15"
@@ -93,6 +112,74 @@ const Filters = () => {
         </svg>{" "}
         Filtros avanzados
       </button>
+      {hasActiveFilters && (
+        <button className="clear-filters" onClick={resetFilters}>
+          ✕ Limpiar
+        </button>
+      )}
+      </div>
+
+      {showFilters && (
+        <div className="advanced-filters">
+          <div className="filter-item">
+            <label>Género</label>
+            <select
+              value={filters.gender}
+              onChange={(e) =>
+                setFilters((prev) => ({
+                  ...prev,
+                  gender: e.target.value,
+                }))
+              }
+            >
+              <option value="all">Todos</option>
+              <option value="female">Mujer</option>
+              <option value="male">Hombre</option>
+            </select>
+          </div>
+
+          <div className="filter-item">
+            <label>Nacionalidad</label>
+            <select
+              value={filters.nationality}
+              onChange={(e) =>
+                setFilters((prev) => ({
+                  ...prev,
+                  nationality: e.target.value,
+                }))
+              }
+            >
+              <option value="all">Todas</option>
+
+              {nationalities.map((nat) => (
+                <option key={nat} value={nat}>
+                  {nat}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="filter-item range">
+            <label>Rango de edad</label>
+            <input
+              type="range"
+              min="18"
+              max="80"
+              value={filters.ageRange[1]}
+              onChange={(e) =>
+                setFilters((prev) => ({
+                  ...prev,
+                  ageRange: [18, Number(e.target.value)],
+                }))
+              }
+            />
+
+            <span className="range-value">
+              {filters.ageRange[0]} - {filters.ageRange[1]} años
+            </span>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

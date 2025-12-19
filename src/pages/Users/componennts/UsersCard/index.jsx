@@ -1,28 +1,31 @@
 import React from "react";
-import useUsers from "../../hooks/useUsers";
+import { useContext } from "react";
+import { UsersContext } from "../../context/UsersProvider";
 import "./index.css";
 import ConfirmDeleteModal from "../../../../components/ModalDelete";
 import ModalMessage from "../../../../components/ModalMenssage";
 const UsersCard = () => {
   const {
-    states: {
-      users,
-      isLoading,
-      navigate,
-      showModal,
-      selectedUser,
-      showModalMessage,
-      userToMessage
+    useUsers: {
+      states: {
+        users,
+        isLoading,
+        navigate,
+        showModal,
+        selectedUser,
+        showModalMessage,
+        userToMessage,
+      },
+      handles: {
+        openDeleteModal,
+        closeModal,
+        confirmDelete,
+        closeModalMessage,
+        confirmSend,
+        openMessageModal,
+      },
     },
-    handles: {
-      openDeleteModal,
-      closeModal,
-      confirmDelete,
-      closeModalMessage,
-      confirmSend,
-      openMessageModal
-    },
-  } = useUsers();
+  } = useContext(UsersContext);
 
   if (isLoading) {
     return <p className="loading">Cargando usuarios...</p>;

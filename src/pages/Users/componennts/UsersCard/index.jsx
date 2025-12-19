@@ -15,6 +15,8 @@ const UsersCard = () => {
         selectedUser,
         showModalMessage,
         userToMessage,
+        dispatch,
+        contacts
       },
       handles: {
         openDeleteModal,
@@ -23,6 +25,7 @@ const UsersCard = () => {
         closeModalMessage,
         confirmSend,
         openMessageModal,
+        addContact,
       },
     },
   } = useContext(UsersContext);
@@ -30,7 +33,6 @@ const UsersCard = () => {
   if (isLoading) {
     return <p className="loading">Cargando usuarios...</p>;
   }
-
   return (
     <>
       <section className="users-container">
@@ -45,11 +47,8 @@ const UsersCard = () => {
               <div className="user-info">
                 <div className="header-card">
                   <h2>
-                  {user.name.first} {user.name.last}
-                </h2>
-                <button>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><g fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M16 2v2M7 22v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2M8 2v2"/><circle cx="12" cy="11" r="3"/><rect width="18" height="18" x="3" y="4" rx="2"/></g></svg>
-                </button>
+                    {user.name.first} {user.name.last}
+                  </h2>
                 </div>
                 <p className="email">{user.email}</p>
 
@@ -105,7 +104,10 @@ const UsersCard = () => {
                 </svg>{" "}
                 Ver
               </button>
-              <button className="message" onClick={() => openMessageModal(user)}>
+              <button
+                className="message"
+                onClick={() => openMessageModal(user)}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="13"

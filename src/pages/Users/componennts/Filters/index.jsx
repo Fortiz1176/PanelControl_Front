@@ -8,7 +8,7 @@ const Filters = () => {
     useUsers: {
       states: { users, showFilters, filters, nationalities, hasActiveFilters },
       setters: { setShowFilters, setFilters },
-      handles: { resetFilters },
+      handles: { resetFilters, exportToCSV },
     },
   } = useContext(UsersContext);
 
@@ -39,7 +39,11 @@ const Filters = () => {
           <p className="subtitle">{users?.length} usuarios encontrados</p>
         </div>
 
-        <button className="export-button">
+        <button
+          className="export-button"
+          onClick={exportToCSV}
+          disabled={!users.length}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="15"
@@ -48,13 +52,11 @@ const Filters = () => {
           >
             <path
               fill="none"
-              stroke="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              stroke="#000"
+              strokeWidth="2"
               d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5l5-5m-5-7v12"
             />
-          </svg>{" "}
+          </svg>
           Exportar CSV
         </button>
       </div>
@@ -92,31 +94,31 @@ const Filters = () => {
 
       <div className="filters">
         <button
-        className="filter-button"
-        onClick={() => setShowFilters(!showFilters)}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="15"
-          height="15"
-          viewBox="0 0 24 24"
+          className="filter-button"
+          onClick={() => setShowFilters(!showFilters)}
         >
-          <path
-            fill="none"
-            stroke="#000000"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M22 3H2l8 9.46V19l4 2v-8.54z"
-          />
-        </svg>{" "}
-        Filtros avanzados
-      </button>
-      {hasActiveFilters && (
-        <button className="clear-filters" onClick={resetFilters}>
-          ✕ Limpiar
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="#000000"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M22 3H2l8 9.46V19l4 2v-8.54z"
+            />
+          </svg>{" "}
+          Filtros avanzados
         </button>
-      )}
+        {hasActiveFilters && (
+          <button className="clear-filters" onClick={resetFilters}>
+            ✕ Limpiar
+          </button>
+        )}
       </div>
 
       {showFilters && (

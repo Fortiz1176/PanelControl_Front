@@ -113,6 +113,49 @@ const useUsers = () => {
 
   const nationalities = [...new Set(users.map((user) => user.nat))];
 
+  const exportToCSV = () => {
+  if (!filteredUsers.length) return;
+
+  const headers = [
+    "Nombre",
+    "Email",
+    "Género",
+    "Edad",
+    "Nacionalidad",
+    "País",
+  ];
+
+  const rows = filteredUsers.map((user) => [
+    `${user.name.first} ${user.name.last}`,
+    user.email,
+    user.gender,
+    user.dob.age,
+    user.nat,
+    user.location.country,
+  ]);
+
+  const csvContent = [
+    headers.join(","),
+    ...rows.map((row) =>
+      row.map((cell) => `"${cell}"`).join(",")
+    ),
+  ].join("\n");
+
+  const blob = new Blob([csvContent], {
+    type: "text/csv;charset=utf-8;",
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.setAttribute("download", "usuarios.csv");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+
   return {
     states: {
       users: filteredUsers,
@@ -146,6 +189,7 @@ const useUsers = () => {
       closeModalMessage,
       confirmSend,
       resetFilters,
+      exportToCSV,
     },
   };
 };

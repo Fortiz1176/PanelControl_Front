@@ -1,16 +1,71 @@
-# React + Vite
+- Random User Panel:
+    Panel de administración de usuarios construido con React, enfocado en la visualización, filtrado y exportación de información proveniente de la API (https://randomuser.me/)
+    Con este proyecto simulamos un entorno real de trabajo frontend, aplicando buenas practicas de manejo del estado global, arquitectura y escalabilidad.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+-Descripción general:
+    En este proyecto encontramos un panel de control de usuarios que consume datos desde la API (https://randomuser.me/)
+    Permite a un usuario:
+        -Iniciar sesión (autenticación simulada)
+        -Visualizar una lista de usuarios
+        -Aplicar multifiltros
+        -Ver detalles de cada usuarios
+        -Enviar mensajes simulados a los usuarios
+        -Exportar datos de los usuarios respetando los filtros
 
-Currently, two official plugins are available:
+-Tecnologías:
+    -React
+    -Vite
+    -React Router DOM
+    -Redux Toolkit
+    -RTK Query
+    -Context API
+    -CSS
+    -Random user api
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Arquitectura del proyecto:
+    En este proyecto observamos una arquitectura modular y escalable, separando responsabilidades
+        -Redux: Estado global de dominio (usuarios, mensajes)
+        -Context API: Estado compartido de UI y lógica derivada (filtros exportación)
+        -Custom Hooks: Encapsulación de lógica compleja
+        -Componentes desacoplados: Reutilizables y faciles de mantener
+    Se evita la duplicación de estado y se prioriza el uso de estado derivado
 
-## React Compiler
+Sistema de autenticación:
+    -Pantalla de login
+    -Protección de rutas privadas
+    -Persistencia de sesión con localstorage
+    -Redireccióon automática según estado de autenticación
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
 
-## Expanding the ESLint configuration
+Funcionalidades principales:
+    Gestion de usuarios:
+        -Listado de usuarios desde la API
+        -Visualización de información importante
+        -Vista de detalle de usuario
+    MultiFiltros:
+        -Busqueda por nombre o correo
+        -Filtro por genero
+        -Filtro por nacionalidad
+        -Rango de edad
+        -Limpieza total de filtros
+    Todos los filtros se aplican sin cargar datos ni hacer nuevas peticiones.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Exportación de datos:
+    -Exportación de usuarrios en CSV
+    -Respeta los filtros activos o no activos
+    El archivo generado es compatible con
+        -Excel
+        -Sheets
+
+INSTALACIÓN Y EJECUCIÓN LOCAL
+    -Clonar el repositorio: git clone https://github.com/Fortiz1176/PanelControl_Front.git
+    -Instalar dependencias: npm i
+    Ejecutar en modo desarrollo: npm run dev
+    Ejecución en puerto 3000
+
+Decisiones técnicas:
+    -RTK Query para el consumo de API y cacheo eficiente
+    -Context API para evitar prop drilling y compartir estado
+    -Estado derivado para filtros (sin mutar el estado base)
+    -Separación de lógia y UI
+    

@@ -13,6 +13,12 @@ const usersSlice = createSlice({
       state.list = action.payload;
       localStorage.setItem("users", JSON.stringify(action.payload));
     },
+    removeUser: (state, action) => {
+      state.list = state.list.filter(
+        (user) => user.login.uuid !== action.payload
+      );
+      localStorage.setItem("users", JSON.stringify(state.list));
+    },
     clearUsers: (state) => {
       state.list = [];
       localStorage.removeItem("users");
@@ -20,5 +26,5 @@ const usersSlice = createSlice({
   },
 });
 
-export const { setUsers, clearUsers } = usersSlice.actions;
+export const { setUsers, removeUser, clearUsers } = usersSlice.actions;
 export default usersSlice.reducer;

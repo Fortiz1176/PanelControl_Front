@@ -1,18 +1,15 @@
 import React from "react";
 import useUsers from "../../hooks/useUsers";
-import { useNavigate } from "react-router-dom";
 import "./index.css";
 const UsersCard = () => {
   const {
-    states: { users, data, isLoading },
+    states: { users, isLoading, navigate },
+    handles: { handleDelete }
   } = useUsers();
 
-  const navigate = useNavigate();
   if (isLoading) {
     return <p className="loading">Cargando usuarios...</p>;
   }
-  console.log("Estos son los users", users);
-  console.log(data);
 
   return (
     <section className="users-container">
@@ -96,7 +93,7 @@ const UsersCard = () => {
               </svg>{" "}
               Mensaje
             </button>
-            <button className="delete">
+            <button className="delete" onClick={() => handleDelete(user.login.uuid)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="13"

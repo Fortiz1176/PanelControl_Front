@@ -5,6 +5,7 @@ import { AuthGuard } from "./AuthGuard";
 import { AuthRoutes } from "./PublicRoutes";
 import { UsersRoutes } from "./PrivatesRoutes/Users";
 import { routesApp } from "../routes";
+import Layout from "../components/layout";
 
 function App() {
   return (
@@ -21,7 +22,12 @@ function App() {
 
           {/* Rutas privadas */}
           <Route element={<AuthGuard type="Private" />}>
-            <Route path={`${routesApp.Private}/*`} element={<UsersRoutes />} />
+            <Route element={<Layout />}>
+              <Route
+                path={`${routesApp.Private}/*`}
+                element={<UsersRoutes />}
+              />
+            </Route>
           </Route>
         </Routes>
       </Suspense>

@@ -4,15 +4,15 @@ import useUsers from "../../hooks/useUsers";
 
 const Filters = () => {
   const {
-    states: { data, isLoading },
+    states: { users, isLoading },
   } = useUsers();
 
   return (
-    <section class="users-header">
-      <div class="header-top">
-        <div class="title-row">
-          <div class="title">
-            <span class="icon">
+    <section className="users-header">
+      <div className="header-top">
+        <div className="title-row">
+          <div className="title">
+            <span className="icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="30"
@@ -31,10 +31,10 @@ const Filters = () => {
             </span>
             <h1>Usuarios</h1>
           </div>
-            <p class="subtitle">{data?.results.length} usuarios encontrados</p>
+          <p className="subtitle">{users?.length} usuarios encontrados</p>
         </div>
 
-        <button class="export-button">
+        <button className="export-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="15"
@@ -54,8 +54,8 @@ const Filters = () => {
         </button>
       </div>
 
-      <div class="search-box">
-        <span class="search-icon">
+      <div className="search-box">
+        <span className="search-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="15"
@@ -75,7 +75,7 @@ const Filters = () => {
         <input type="text" placeholder="Buscar por nombre o email..." />
       </div>
 
-      <button class="filter-button">
+      <button className="filter-button">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="15"

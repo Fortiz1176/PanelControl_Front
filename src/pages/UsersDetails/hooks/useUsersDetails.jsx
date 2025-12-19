@@ -16,7 +16,7 @@ const useUsersDetails = () => {
 
   return {
     state: {
-        users, user
+        users, user, navigate
     }
   }
 }

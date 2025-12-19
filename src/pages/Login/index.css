@@ -1,4 +1,4 @@
-/* RESET BÁSICO */
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* CONTENEDOR PRINCIPAL */
+
 .login-container {
   width: 100%;
   min-height: 100vh;
@@ -17,7 +17,7 @@
   background: linear-gradient(135deg, #0b2545, #102a43);
 }
 
-/* CARD */
+
 .login-card {
   background-color: #ffffff;
   border-radius: 16px;
@@ -30,7 +30,6 @@
 
 
 
-/* ICONO */
 .icon-wrapper {
   width: 56px;
   height: 56px;
@@ -47,7 +46,7 @@
   height: 28px;
 }
 
-/* TÍTULOS */
+
 .title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -60,7 +59,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* FORMULARIO */
 .login-form {
   text-align: left;
 }
@@ -90,7 +88,6 @@
   border-color: #3b82f6;
 }
 
-/* BOTÓN */
 .login-form button {
   width: 100%;
   margin-top: 1rem;
@@ -114,14 +111,12 @@
   cursor: not-allowed;
 }
 
-/* ERROR */
 .login-form .error {
   margin-top: 0.75rem;
   font-size: 0.85rem;
   color: #dc2626;
 }
 
-/* REGISTER LINK (si lo vuelves a usar) */
 .register button {
   border: none;
   margin-top: 1rem;
@@ -140,7 +135,6 @@
   font-size: 0.8rem
 }
 
-/* BREAKPOINT TABLET / DESKTOP */
 @media (min-width: 640px) {
   .login-card {
     padding: 2.5rem 2rem;

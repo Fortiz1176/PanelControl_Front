@@ -1,3 +1,35 @@
-div{
-    color: #000;
+.button{
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.content-user {
+  display: grid;
+  grid-template-columns: 1fr; /* Una sola columna */
+  gap: 1.5rem; /* Espaciado entre componentes */
+  padding: 1rem;
+  width: 100%;
+  max-width: 1400px; /* Opcional: para que no se estire infinito en monitores ultra wide */
+  margin: 0 auto;
+}
+
+/* Escritorio (Laptops y monitores grandes) */
+@media (min-width: 1024px) {
+  .content-user {
+    /* Dividir en dos columnas con anchos proporcionales */
+    /* 1fr 1.5fr hace que el historial de mensajes sea un poco más ancho que la info */
+    grid-template-columns: 3fr 1fr; 
+    align-items: start; /* Evita que los componentes se estiren verticalmente si uno es más corto */
+    gap: 2rem;
+    padding: 2rem;
+  }
 }

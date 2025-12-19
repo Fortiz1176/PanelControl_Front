@@ -20,6 +20,8 @@ const useUsers = () => {
 
   const [showFilters, setShowFilters] = useState(false);
 
+  const [exportStatus, setExportStatus] = useState("idle");
+
   const INITIAL_FILTERS = {
     search: "",
     gender: "all",
@@ -113,48 +115,60 @@ const useUsers = () => {
 
   const nationalities = [...new Set(users.map((user) => user.nat))];
 
-  const exportToCSV = () => {
-  if (!filteredUsers.length) return;
+  const exportToCSV = async () => {
+    if (!filteredUsers.length) return;
 
-  const headers = [
-    "Nombre",
-    "Email",
-    "Género",
-    "Edad",
-    "Nacionalidad",
-    "País",
-  ];
+    try {
+      setExportStatus("exporting");
 
-  const rows = filteredUsers.map((user) => [
-    `${user.name.first} ${user.name.last}`,
-    user.email,
-    user.gender,
-    user.dob.age,
-    user.nat,
-    user.location.country,
-  ]);
+      // Simulación de proceso pesado
+      await new Promise((resolve) => setTimeout(resolve, 1200));
 
-  const csvContent = [
-    headers.join(","),
-    ...rows.map((row) =>
-      row.map((cell) => `"${cell}"`).join(",")
-    ),
-  ].join("\n");
+      const headers = [
+        "Nombre",
+        "Email",
+        "Género",
+        "Edad",
+        "Nacionalidad",
+        "País",
+      ];
 
-  const blob = new Blob([csvContent], {
-    type: "text/csv;charset=utf-8;",
-  });
+      const rows = filteredUsers.map((user) => [
+        `${user.name.first} ${user.name.last}`,
+        user.email,
+        user.gender,
+        user.dob.age,
+        user.nat,
+        user.location.country,
+      ]);
 
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
+      const csvContent = [
+        headers.join(","),
+        ...rows.map((row) => row.map((cell) => `"${cell}"`).join(",")),
+      ].join("\n");
 
-  link.href = url;
-  link.setAttribute("download", "usuarios.csv");
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-};
+      const blob = new Blob([csvContent], {
+        type: "text/csv;charset=utf-8;",
+      });
 
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.setAttribute("download", "usuarios.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setExportStatus("done");
+      setTimeout(() => {
+        setExportStatus("idle");
+      }, 2000);
+    } catch (error) {
+      console.error("Error exportando CSV:", error);
+      setExportStatus("error");
+    }
+  };
 
   return {
     states: {
@@ -173,6 +187,7 @@ const useUsers = () => {
       filters,
       nationalities,
       hasActiveFilters,
+      exportStatus,
     },
     setters: {
       setShowModal,

@@ -6,7 +6,15 @@ import { UsersContext } from "../../context/UsersProvider";
 const Filters = () => {
   const {
     useUsers: {
-      states: { users, showFilters, filters, nationalities, hasActiveFilters },
+      states: {
+        users,
+        filteredCount,
+        showFilters,
+        filters,
+        nationalities,
+        hasActiveFilters,
+        exportStatus,
+      },
       setters: { setShowFilters, setFilters },
       handles: { resetFilters, exportToCSV },
     },
@@ -14,6 +22,13 @@ const Filters = () => {
 
   return (
     <section className="users-header">
+      {exportStatus === "exporting" && (
+        <div className="export-toast exporting">Exportando usuarios...</div>
+      )}
+
+      {exportStatus === "done" && (
+        <div className="export-toast success">Exportación completada</div>
+      )}
       <div className="header-top">
         <div className="title-row">
           <div className="title">
@@ -42,7 +57,7 @@ const Filters = () => {
         <button
           className="export-button"
           onClick={exportToCSV}
-          disabled={!users.length}
+          disabled={exportStatus === "exporting" || filteredCount === 0}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +72,9 @@ const Filters = () => {
               d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5l5-5m-5-7v12"
             />
           </svg>
-          Exportar CSV
+          {exportStatus === "exporting" && "Exportando..."}
+          {exportStatus === "done" && "Exportación lista ✓"}
+          {exportStatus === "idle" && "Exportar CSV"}
         </button>
       </div>
 

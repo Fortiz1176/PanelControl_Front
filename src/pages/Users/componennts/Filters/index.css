@@ -161,6 +161,28 @@
   justify-self: end;
 }
 
+.export-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  z-index: 9999;
+}
+
+.export-toast.exporting {
+  background-color: #1e293b;
+  color: white;
+}
+
+.export-toast.success {
+  background-color: #16a34a;
+  color: white;
+}
+
+
 @media (min-width: 1024px) {
   .users-header {
     gap: 1.5rem;

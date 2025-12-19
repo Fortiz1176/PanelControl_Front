@@ -43,6 +43,16 @@
   color: #111827;
 }
 
+.header-card{
+  display: flex;
+  gap: 2rem;
+  cursor: pointer;
+}
+.header-card button{
+  background: none;
+  border: none;
+}
+
 .email {
   font-size: 0.8rem;
   color: #6b7280;

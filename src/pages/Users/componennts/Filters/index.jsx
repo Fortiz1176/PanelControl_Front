@@ -4,7 +4,7 @@ import useUsers from "../../hooks/useUsers";
 
 const Filters = () => {
   const {
-    states: { users, isLoading },
+    states: { users },
   } = useUsers();
 
   return (

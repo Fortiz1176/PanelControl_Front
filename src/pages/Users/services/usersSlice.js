@@ -1,4 +1,3 @@
-// src/pages/Users/services/usersSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -10,15 +9,36 @@ const usersSlice = createSlice({
   initialState,
   reducers: {
     setUsers: (state, action) => {
-      state.list = action.payload;
-      localStorage.setItem("users", JSON.stringify(action.payload));
+      state.list = action.payload.map((user) => ({
+        ...user,
+        messages: Array.isArray(user.messages) ? user.messages : [],
+      }));
+
+      localStorage.setItem("users", JSON.stringify(state.list));
     },
+
     removeUser: (state, action) => {
       state.list = state.list.filter(
         (user) => user.login.uuid !== action.payload
       );
       localStorage.setItem("users", JSON.stringify(state.list));
     },
+
+    addMessageToUser: (state, action) => {
+      const { userId, message } = action.payload;
+
+      const user = state.list.find((u) => u.login.uuid === userId);
+
+      if (user) {
+        if (!Array.isArray(user.messages)) {
+          user.messages = [];
+        }
+
+        user.messages.push(message);
+        localStorage.setItem("users", JSON.stringify(state.list));
+      }
+    },
+
     clearUsers: (state) => {
       state.list = [];
       localStorage.removeItem("users");
@@ -26,5 +46,7 @@ const usersSlice = createSlice({
   },
 });
 
-export const { setUsers, removeUser, clearUsers } = usersSlice.actions;
+export const { setUsers, removeUser, addMessageToUser, clearUsers } =
+  usersSlice.actions;
+
 export default usersSlice.reducer;

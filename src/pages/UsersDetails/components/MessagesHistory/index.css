@@ -1,0 +1,82 @@
+.messages-section {
+  width: 100%;
+}
+
+.messages-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.header-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.messages-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.messages-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.message-bubble-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  background: #f4f7f9;
+  border-radius: 10px;
+}
+
+.message-text {
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.empty-state {
+  text-align: center;
+}
+
+.empty-circle {
+  width: 64px;
+  height: 64px;
+  background: #f1f5f9;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 0.75rem;
+}
+
+.empty-text {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+@media (min-width: 1024px) {
+  .messages-card {
+    position: sticky;
+    top: 2rem;
+    min-height: 420px;
+  }
+}

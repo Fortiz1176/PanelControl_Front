@@ -1,7 +1,7 @@
-// pages/Login/components/FormLogin/index.jsx
 import { useContext } from "react";
 import useLogin from "../../hooks/useLogin";
 import { LoginContext } from "../../context/LoginProvider";
+import ButtonCopy from "../../../../components/buttonCopy";
 
 const FormLogin = () => {
   const {
@@ -41,11 +41,14 @@ const FormLogin = () => {
       <div className="demo">
         <p>Demo:</p>
         <p>
-          <strong>Email:</strong> <span>{data?.results?.[0]?.email}</span>
+          <strong>Email:</strong>
+          <ButtonCopy value={data?.results?.[0]?.email} placement="top">
+            {data?.results?.[0]?.email}
+          </ButtonCopy>
         </p>
         <p>
           <strong>Password:</strong>{" "}
-          <span>{data?.results?.[0]?.login?.password}</span>
+          <ButtonCopy value={data?.results?.[0]?.login?.password} placement="top">{data?.results?.[0]?.login?.password}</ButtonCopy>
         </p>
       </div>
     </form>

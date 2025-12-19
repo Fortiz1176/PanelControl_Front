@@ -1,11 +1,9 @@
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
-
 
 .login-container {
   width: 100%;

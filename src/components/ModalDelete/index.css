@@ -1,0 +1,84 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1rem;
+}
+.modal-container {
+  width: 100%;
+  max-width: 420px;
+
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.75rem 1.5rem;
+
+  text-align: center;
+
+  animation: modalFadeIn 0.2s ease-out;
+}
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0b2545;
+  margin-bottom: 0.75rem;
+}
+
+.modal-description {
+  font-size: 0.95rem;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.modal-warning {
+  font-size: 0.9rem;
+  color: #dc2626;
+  margin-bottom: 1.5rem;
+}
+
+.modal-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.modal-btn-danger {
+  background: #dc2626;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.modal-btn-danger:hover {
+  background: #b91c1c;
+}
+
+.modal-btn-cancel {
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+}
+
+.modal-btn-cancel:hover {
+  background: #f9fafb;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

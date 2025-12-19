@@ -47,8 +47,6 @@ export const useLogin = () => {
       setError("Credenciales inválidas");
       return;
     }
-
-    //Guardar los usuarios solo una vez
     if (usersInStore.length === 0) {
       dispatch(setUsers(usersSource));
     }

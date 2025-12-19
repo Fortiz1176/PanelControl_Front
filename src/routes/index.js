@@ -13,7 +13,6 @@ export const routesUsers = {
     raiz: "app/users",
     Detalles: "/:id",
     General: "/"
-    //inNav: true
 }
 
 export const ALL_ROUTES = {

@@ -96,6 +96,9 @@
   background: transparent;
   cursor: pointer;
 }
+.logout-btn:hover {
+  scale: 1.2;
+}
 
 .app-content {
   width: 100%;

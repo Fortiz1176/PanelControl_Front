@@ -30,7 +30,7 @@ const Layout = () => {
                 </svg>
               </span>
               <div className="logo-text">
-                <strong>UserHub</strong>
+                <strong>Random User</strong>
                 <span>Panel de Control</span>
               </div>
             </div>
